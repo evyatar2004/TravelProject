@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Trips</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f7f9fc;
+        }
+
+        header {
+            background-color: #1e90ff;
+            padding: 15px 20px;
+        }
+
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar li a:hover, .nav-bar li a.active {
+            background-color: #005bb5;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .trips-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .trips-header h1 {
+            color: #1e90ff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .trips-header p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .trips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .trip-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .trip-card .trip-details {
+            padding: 15px;
+        }
+
+        .trip-card h3 {
+            font-size: 1.5rem;
+            color: #1e90ff;
+            margin-bottom: 5px;
+        }
+
+        .trip-card p {
+            color: #555;
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .trip-card button {
+            display: block;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 15px auto 10px auto;
+            text-align: center;
+        }
+
+        .trip-card button:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #1e90ff;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="MyTrip.html" class="active">My Trips</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="Support.html">Support</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="trips-header">
+        <h1>Your Trips</h1>
+        <p>Here are your upcoming and past trips.</p>
+    </section>
+
+    <section class="trips-container">
+        <div class="trip-card">
+            <div class="trip-details">
+                <h3>New York</h3>
+                <p><strong>Departure:</strong> 2024-12-15</p>
+                <p><strong>Booking ID:</strong> NY12345</p>
+                <button>View Details</button>
+            </div>
+        </div>
+        <div class="trip-card">
+            <div class="trip-details">
+                <h3>Paris</h3>
+                <p><strong>Departure:</strong> 2024-12-20</p>
+                <p><strong>Booking ID:</strong> PR67890</p>
+                <button>View Details</button>
+            </div>
+        </div>
+        <div class="trip-card">
+            <div class="trip-details">
+                <h3>Tokyo</h3>
+                <p><strong>Departure:</strong> 2025-01-05</p>
+                <p><strong>Booking ID:</strong> TK11223</p>
+                <button>View Details</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Flight Booking. All rights reserved.</p>
+</footer>
+
+<script>
+    function goToPage() {
+        window.location.href = "Deals.html";
+    }
+    function goToPage() {
+        window.location.href = "project.html";
+    }
+    function goToPage() {
+        window.location.href = "MyTrip.html";
+    }
+    function goToPage() {
+        window.location.href = "Support.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f7f9fc;
+        }
+
+        header {
+            background-color: #1e90ff;
+            padding: 15px 20px;
+        }
+
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar li a:hover, .nav-bar li a.active {
+            background-color: #005bb5;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .support-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .support-header h1 {
+            color: #1e90ff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .support-header p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .support-section {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .support-section h2 {
+            color: #1e90ff;
+            margin-bottom: 20px;
+        }
+
+        .support-section p {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input, textarea, button {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #1e90ff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .faq {
+            margin-top: 30px;
+        }
+
+        .faq h3 {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            color: #1e90ff;
+        }
+
+        .faq p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #1e90ff;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="MyTrip.html">My Trips</a></li>
+            <li><a href="Deals.html">Deals</a></li>
+            <li><a href="Support.html" class="active">Support</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="support-header">
+        <h1>How can we help you?</h1>
+        <p>Contact our support team or find answers to common questions below.</p>
+    </section>
+
+    <section class="support-section">
+        <h2>Contact Support</h2>
+        <p>Please fill out the form below, and our team will get back to you as soon as possible.</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="How can we help you?" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="faq">
+            <h2>FAQs</h2>
+            <h3>1. How do I change my booking?</h3>
+            <p>You can modify your booking by visiting the "My Trips" section and selecting the trip you want to update.</p>
+
+            <h3>2. What is the cancellation policy?</h3>
+            <p>The cancellation policy varies depending on your booking. Please refer to your ticket confirmation for details.</p>
+
+            <h3>3. How do I contact customer support?</h3>
+            <p>Fill out the form above or email us at support@flightbooking.com.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Flight Booking. All rights reserved.</p>
+</footer>
+
+<script>
+    function goToPage() {
+        window.location.href = "Deals.html";
+    }
+    function goToPage() {
+        window.location.href = "project.html";
+    }
+    function goToPage() {
+        window.location.href = "MyTrip.html";
+    }
+    function goToPage() {
+        window.location.href = "Support.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Deals</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f7f9fc;
+        }
+
+        header {
+            background-color: #1e90ff;
+            padding: 15px 20px;
+        }
+
+        .nav-bar {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar li a:hover, .nav-bar li a.active {
+            background-color: #005bb5;
+            border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .deals-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .deals-header h1 {
+            color: #1e90ff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .deals-header p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .deals-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .deal-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .deal-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .deal-card h3 {
+            font-size: 1.5rem;
+            color: #1e90ff;
+            margin: 15px 0 5px;
+        }
+
+        .deal-card p {
+            color: #555;
+            margin: 0 0 15px;
+        }
+
+        .deal-card button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .deal-card button:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #1e90ff;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="MyTrip.html">My Trips</a></li>
+            <li><a href="project.html" class="active">Deals</a></li>
+            <li><a href="Support.html">Support</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="deals-header">
+        <h1>Exclusive Flight Deals</h1>
+        <p>Don't miss these limited-time offers to your favorite destinations.</p>
+    </section>
+
+    <section class="deals-container">
+        <div class="deal-card">
+            <img src="https://via.placeholder.com/300x200" alt="New York">
+            <h3>New York</h3>
+            <p>Starting at <strong>$299</strong></p>
+            <button>Book Now</button>
+        </div>
+        <div class="deal-card">
+            <img src="https://via.placeholder.com/300x200" alt="Paris">
+            <h3>Paris</h3>
+            <p>Starting at <strong>$399</strong></p>
+            <button>Book Now</button>
+        </div>
+        <div class="deal-card">
+            <img src="https://via.placeholder.com/300x200" alt="Tokyo">
+            <h3>Tokyo</h3>
+            <p>Starting at <strong>$499</strong></p>
+            <button>Book Now</button>
+        </div>
+        <div class="deal-card">
+            <img src="https://via.placeholder.com/300x200" alt="Dubai">
+            <h3>Dubai</h3>
+            <p>Starting at <strong>$599</strong></p>
+            <button>Book Now</button>
+        </div>
+        <div class="deal-card">
+            <img src="https://via.placeholder.com/300x200" alt="London">
+            <h3>London</h3>
+            <p>Starting at <strong>$199</strong></p>
+            <button>Book Now</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Flight Booking. All rights reserved.</p>
+</footer>
+
+
+<script>
+    function goToPage() {
+        window.location.href = "project.html";
+    }
+    function goToPage() {
+        window.location.href = "project.html";
+    }
+    function goToPage() {
+        window.location.href = "MyTrip.html";
+    }
+    function goToPage() {
+        window.location.href = "Support.html";
+    }
+</script>
+</body>
+</html>

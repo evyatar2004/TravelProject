@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #1e90ff;
+            padding: 10px 20px;
+        }
+
+        .nav-bar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-bar li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+
+        .nav-bar li a:hover {
+            background-color: #005bb5;
+            border-radius: 5px;
+        }
+
+        /* Search Bar Section */
+        .search-bar {
+            text-align: center;
+            margin: 50px 20px;
+        }
+
+        .search-bar h1 {
+            color: #1e90ff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .search-bar form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .search-bar input, .search-bar button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            background-color: #1e90ff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .search-bar button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Flight Suggestions Section */
+        .flight-suggestions {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .flight-suggestions h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Container for the cards with horizontal scrolling */
+        .flight-cards-wrapper {
+            display: flex;
+            overflow-x: scroll;
+            gap: 15px;
+            padding: 10px 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f1f1f1;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hide default scrollbar */
+        .flight-cards-wrapper::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .flight-cards-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .flight-cards-wrapper::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 10px;
+            border: 3px solid #f1f1f1;
+        }
+
+        .flight-cards-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .flight-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            min-width: 250px;
+            max-width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            scroll-snap-align: center;
+            flex-shrink: 0;
+        }
+
+        .flight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .flight-card img {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+            object-fit: cover;
+            height: 150px;
+        }
+
+        .flight-card h3 {
+            color: #1e90ff;
+            margin: 10px 0;
+        }
+
+        .flight-card p {
+            color: #666;
+            margin: 0 10px 15px;
+        }
+
+        .flight-card button {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .flight-card button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .search-bar form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flight-cards-wrapper {
+                padding: 10px 10px;
+            }
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 5px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .dropdown li {
+            padding: 8px 12px;
+            cursor: pointer;
+            list-style-type: none;
+        }
+
+        .dropdown li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Dropdown toggle button */
+        .dropdown-toggle {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="nav-bar">
+            <li><a href="project.html">Home</a></li>
+            <li><a href="MyTrip.html">My Trips</a></li>
+            <li><a href="Deals.html">Deals</a></li>
+            <li><a href="Support.html">Support</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="search-bar">
+        <h1 id="search-heading">Find Your Perfect Flight</h1>
+        <form id="flight-search-form">
+            <div class="dropdown-container">
+                <input type="text" id="from-location" placeholder="From" required>
+                <button type="button" id="from-dropdown-btn" class="dropdown-toggle">▼</button>
+                <ul class="dropdown hidden" id="from-dropdown"></ul>
+            </div>
+
+            <div class="dropdown-container">
+                <input type="text" id="to-location" placeholder="To" required>
+                <button type="button" id="to-dropdown-btn" class="dropdown-toggle">▼</button>
+                <ul class="dropdown hidden" id="to-dropdown"></ul>
+            </div>
+
+            <input type="date" id="departure-date" required>
+            <input type="number" id="passenger-count" placeholder="Passengers" min="1" required>
+            <button type="submit" id="search-button">Search Flights</button>
+        </form>
+    </section>
+
+    <section class="flight-suggestions">
+        <h2 id="suggestions-heading">Popular Flight Deals</h2>
+        <div class="flight-cards-wrapper" id="flight-cards-wrapper">
+            <div class="flight-card" id="card-1">
+                <img src="https://via.placeholder.com/250x150" alt="Destination 1">
+                <h3 id="destination-1">New York</h3>
+                <p id="price-1">From $299</p>
+                <button id="book-now-1">Book Now</button>
+            </div>
+            <div class="flight-card" id="card-2">
+                <img src="https://via.placeholder.com/250x150" alt="Destination 2">
+                <h3 id="destination-2">Paris</h3>
+                <p id="price-2">From $399</p>
+                <button id="book-now-2">Book Now</button>
+            </div>
+            <div class="flight-card" id="card-3">
+                <img src="https://via.placeholder.com/250x150" alt="Destination 3">
+                <h3 id="destination-3">Tokyo</h3>
+                <p id="price-3">From $499</p>
+                <button id="book-now-3">Book Now</button>
+            </div>
+            <div class="flight-card" id="card-4">
+                <img src="https://via.placeholder.com/250x150" alt="Destination 4">
+                <h3 id="destination-4">London</h3>
+                <p id="price-4">From $249</p>
+                <button id="book-now-4">Book Now</button>
+            </div>
+            <div class="flight-card" id="card-5">
+                <img src="https://via.placeholder.com/250x150" alt="Destination 5">
+                <h3 id="destination-5">Sydney</h3>
+                <p id="price-5">From $549</p>
+                <button id="book-now-5">Book Now</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    const countries = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia",
+        "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",
+        "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei",
+        "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Chad",
+        "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus",
+        "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
+        "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland",
+        "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala",
+        "Guinea", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
+        "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+        "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
+        "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+        "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco",
+        "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
+        "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
+        "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay",
+        "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis",
+        "Saint Lucia", "Samoa", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
+        "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "Spain",
+        "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand",
+        "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda",
+        "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+        "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    ];
+
+    const fromDropdown = document.getElementById('from-dropdown');
+    const toDropdown = document.getElementById('to-dropdown');
+    const fromInput = document.getElementById('from-location');
+    const toInput = document.getElementById('to-location');
+    const fromDropdownBtn = document.getElementById('from-dropdown-btn');
+    const toDropdownBtn = document.getElementById('to-dropdown-btn');
+
+
+    // פונקציונליות משופרת של התפריט הנפתח
+    function setupDropdown(input, dropdown, dropdownBtn) {
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target) &&
+                !dropdownBtn.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // סנן מדינות על סמך קלט
+        input.addEventListener('input', function() {
+            const searchTerm = input.value.toLowerCase();
+            const filteredCountries = countries.filter(country =>
+                country.toLowerCase().includes(searchTerm)
+            );
+            populateDropdown(dropdown, filteredCountries, input);
+        });
+
+// החלף את התפריט הנפתח בלחיצת כפתור
+        dropdownBtn.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent immediate closing
+            dropdown.classList.toggle('hidden');
+
+
+            // אכלס מחדש בכל המדינות או המדינות שסוננו
+            const searchTerm = input.value.toLowerCase();
+            const filteredCountries = searchTerm
+                ? countries.filter(country => country.toLowerCase().includes(searchTerm))
+                : countries;
+            populateDropdown(dropdown, filteredCountries, input);
+        });
+    }
+
+    //// התפריט הנפתח לאכלוס עם מדינות
+    function populateDropdown(dropdown, list, input) {
+        dropdown.innerHTML = '';
+        list.forEach(function (country) {
+            const li = document.createElement('li');
+            li.textContent = country;
+            li.addEventListener('click', function () {
+                input.value = country;
+                dropdown.classList.add('hidden');
+            });
+            dropdown.appendChild(li);
+        });
+
+//// אם אין תוצאות, הצג הודעה
+        if (list.length === 0) {
+            const noResultLi = document.createElement('li');
+            noResultLi.textContent = 'No countries found';
+            noResultLi.style.color = '#888';
+            dropdown.appendChild(noResultLi);
+        }
+    }
+
+
+    setupDropdown(fromInput, fromDropdown, fromDropdownBtn);
+    setupDropdown(toInput, toDropdown, toDropdownBtn);
+    //מנע שליחת טופס אם שני הקלטים זהים//
+    document.getElementById('flight-search-form').addEventListener('submit', function(event) {
+        if (fromInput.value === toInput.value) {
+            event.preventDefault();
+            alert('From and To locations must be different');
+        }
+    });
+
+    function goToPage() {
+        window.location.href = "Deals.html";
+    }
+    function goToPage() {
+        window.location.href = "project.html";
+    }
+    function goToPage() {
+        window.location.href = "MyTrip.html";
+    }
+    function goToPage() {
+        window.location.href = "Support.html";
+    }
+
+</script>
+</body>
+</html>
