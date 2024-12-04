@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Password Recovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+            outline: none;
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+
+        .forgot-password {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #2575fc;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .forgot-password:hover {
+            color: #6a11cb;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #2575fc;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .signup-link:hover {
+            color: #6a11cb;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container" id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+        <button type="submit" class="button">Log In</button>
+        <p class="forgot-password" id="forgot-password">Forgot your password?</p>
+        <p class="signup-link" id="signup-link">Don't have an account? Sign Up</p>
+    </form>
+</div>
+
+<div class="container hidden" id="reset-container">
+    <h2>Password Recovery</h2>
+    <form id="reset-form">
+        <div class="form-group">
+            <label for="phone">Enter your phone number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="000000000">
+        </div>
+        <div class="form-group">
+            <label for="new-password">Enter new password</label>
+            <input type="password" id="new-password" name="new-password" required>
+        </div>
+        <button type="submit" class="button">Reset Password</button>
+    </form>
+</div>
+
+<script>
+    const loginForm = document.getElementById('login-form');
+    const resetForm = document.getElementById('reset-form');
+    const forgotPasswordLink = document.getElementById('forgot-password');
+    const signupLink = document.getElementById('signup-link');
+    const loginContainer = document.getElementById('login-container');
+    const resetContainer = document.getElementById('reset-container');
+
+    // Event listener for login
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === 'evyatar' && password === '1234') {
+            window.location.href = 'project.html'; // Navigate to dashboard
+        } else {
+            alert('Invalid username or password');
+        }
+    });
+
+    // Event listener for password recovery
+    forgotPasswordLink.addEventListener('click', function() {
+        loginContainer.classList.add('hidden');
+        resetContainer.classList.remove('hidden');
+    });
+
+    // Event listener for sign up
+    signupLink.addEventListener('click', function() {
+        window.location.href = 'signup.html'; // הפנייה לדף ההרשמה
+    });
+
+
+    // Event listener for reset form
+    resetForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const phone = document.getElementById('phone').value;
+        const newPassword = document.getElementById('new-password').value;
+
+        if (phone && newPassword) {
+            alert('Password successfully reset! You can now log in with your new password.');
+            resetContainer.classList.add('hidden');
+            loginContainer.classList.remove('hidden');
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+</script>
+</body>
+</html>
